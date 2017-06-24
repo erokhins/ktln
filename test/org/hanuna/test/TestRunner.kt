@@ -59,3 +59,9 @@ fun assertEqualsToFile(expectedFile: File, actual: String) {
     }
 
 }
+
+fun assertEquals(expected: String, actual: String, message: String = "") {
+    if (expected != actual) {
+        throw ComparisonFailure(message, expected, actual)
+    }
+}

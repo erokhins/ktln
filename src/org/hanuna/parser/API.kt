@@ -1,8 +1,7 @@
 package org.hanuna.parser
 
-interface FilePosition {
-    val lineNumber: Int
-    val index: Int
+data class FilePosition(val lineNumber: Int, val positionInLine: Int) {
+    override fun toString() = "$lineNumber:$positionInLine"
 }
 
 interface MyCharSequence {
