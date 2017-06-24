@@ -1,6 +1,6 @@
 package org.hanuna.lexer
 
-class FileReader(val text: String): Sequence<Unit, Char> {
+class FileReader(val text: String): KtlnSequence<Char, Unit> {
     override var lineNumber = 1
         private set
 
@@ -27,7 +27,7 @@ class FileReader(val text: String): Sequence<Unit, Char> {
     }
 
     override fun fallback(prevTokenIndex: Int) {
-        checkTokenIndex(prevTokenIndex)
+        checkFallbackParameter(prevTokenIndex)
         val fallbackText = text.substring(prevTokenIndex, tokenIndex)
 
         lineNumber -= fallbackText.count { it == '\n' }

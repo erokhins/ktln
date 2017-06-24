@@ -3,7 +3,7 @@ package org.hanuna.lexer
 import org.hanuna.parser.FilePosition
 
 
-interface Sequence<out Id : Any, out Value: Any> {
+interface KtlnSequence<out Value : Any, out Id: Any> {
     // all offsets about begin current token
     val lineNumber: Int
     val positionInLine: Int
@@ -17,14 +17,14 @@ interface Sequence<out Id : Any, out Value: Any> {
     fun fallback(prevTokenIndex: Int)
 }
 
-fun Sequence<*, *>.checkTokenIndex(prevTokenIndex: Int) {
+fun KtlnSequence<*, *>.checkFallbackParameter(prevTokenIndex: Int) {
     if (prevTokenIndex > tokenIndex || prevTokenIndex < 0)
         throw IllegalAccessException("Illegal argument: $prevTokenIndex, currentIndex: $tokenIndex")
 }
 
-fun Sequence<*, *>.advance(count: Int) = repeat(count) { advance() }
+fun KtlnSequence<*, *>.advance(count: Int) = repeat(count) { advance() }
 
-val Sequence<*, *>.position get() = FilePosition(lineNumber, positionInLine)
+val KtlnSequence<*, *>.position get() = FilePosition(lineNumber, positionInLine)
 
 
 interface KtlnLexer {
