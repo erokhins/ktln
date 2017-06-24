@@ -1,7 +1,12 @@
 package org.hanuna.test
 
+import com.intellij.rt.execution.junit.FileComparisonFailure
+import junit.framework.ComparisonFailure
+import org.junit.Assert
 import org.junit.Test
 import java.io.File
+import java.io.IOException
+import kotlin.test.assertEquals
 
 abstract class AbstractFileTest(
         val inputFolder: String,
@@ -22,7 +27,7 @@ abstract class AbstractFileTest(
             else {
                 val fileToWrite = outputFile.resolveSibling("${outputFile.nameWithoutExtension}.$outputPostfix")
                 val output = transform(file.readText(), relativePath)
-                fileToWrite.writeText(output)
+                assertEqualsToFile(fileToWrite, output)
             }
         }
     }
@@ -35,4 +40,22 @@ class SimpleTest : AbstractFileTest("src", "o/simple/", "_kt") {
     override fun transform(inputFileContent: String, relativePath: String): String {
         return relativePath + "\n" + inputFileContent
     }
+}
+
+fun assertEqualsToFile(expectedFile: File, actual: String) {
+    try {
+        if (!expectedFile.exists()) {
+            expectedFile.writeText(actual)
+            Assert.fail("Expected data file did not exist. Generating: " + expectedFile)
+        }
+
+        val expected = expectedFile.readText()
+        if (expected != actual) {
+            throw FileComparisonFailure("Actual data differs from file content: " + expectedFile.name, expected, actual,
+                    expectedFile.absolutePath)
+        }
+    } catch (e: IOException) {
+        throw e
+    }
+
 }
