@@ -1,6 +1,6 @@
 package org.hanuna.lexer
 
-class FileReader(val text: String): KtlnSequence<Char, Unit> {
+class KtlnFileReader(val text: String): KtlnSequence<Char, Unit> {
     override var lineNumber = 1
         private set
 

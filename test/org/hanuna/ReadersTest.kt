@@ -141,15 +141,15 @@ abstract class ReadersTest {
 
     abstract fun createReader(text: String): KtlnSequence<Char, *>
 
-    class FileReaderTest : ReadersTest() {
-        override fun createReader(text: String) = FileReader(text)
+    class KtlnFileReaderTest : ReadersTest() {
+        override fun createReader(text: String) = KtlnFileReader(text)
     }
 
     class CachedFileReaderTest3 : ReadersTest() {
-        override fun createReader(text: String): KtlnSequence<Char, *> = CachedKtlnSequence(FileReader(text), 3)
+        override fun createReader(text: String): KtlnSequence<Char, *> = CachedKtlnSequence(KtlnFileReader(text), 3)
     }
 
     class CachedFileReaderTest1 : ReadersTest() {
-        override fun createReader(text: String): KtlnSequence<Char, *> = CachedKtlnSequence(FileReader(text), 1)
+        override fun createReader(text: String): KtlnSequence<Char, *> = CachedKtlnSequence(KtlnFileReader(text), 1)
     }
 }
