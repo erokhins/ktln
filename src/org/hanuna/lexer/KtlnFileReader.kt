@@ -1,5 +1,8 @@
 package org.hanuna.lexer
 
+import org.hanuna.sequence.KtlnSequence
+import org.hanuna.sequence.checkFallbackParameter
+
 class KtlnFileReader(val text: String): KtlnSequence<Char, Unit> {
     override var lineNumber = 1
         private set

@@ -1,6 +1,9 @@
 package org.hanuna
 
 import org.hanuna.lexer.*
+import org.hanuna.sequence.KtlnSequence
+import org.hanuna.sequence.advance
+import org.hanuna.sequence.position
 import org.hanuna.test.assertEquals
 import org.junit.Test
 import kotlin.test.assertEquals

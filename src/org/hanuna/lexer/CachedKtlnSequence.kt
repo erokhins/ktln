@@ -1,5 +1,8 @@
 package org.hanuna.lexer
 
+import org.hanuna.sequence.KtlnSequence
+import org.hanuna.sequence.checkFallbackParameter
+
 class CachedKtlnSequence<out Value : Any, out Id : Any>(
         private val delegate: KtlnSequence<Value, Id>,
         private val cacheSize: Int = 15
